@@ -28,6 +28,25 @@ Salve e feche (`Ctrl + O`, `Enter`, `Ctrl + X`).
 
 ---
 
+## 💾 1.1. Backup e Aplicação Automática via Script
+
+Antes de alterar o arquivo `sources.list`, faça um backup e substitua o conteúdo automaticamente com o comando abaixo:
+
+```bash
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup.$(date +%Y%m%d%H%M)
+
+sudo bash -c 'cat > /etc/apt/sources.list <<EOF
+deb http://old-releases.ubuntu.com/ubuntu/ lunar main restricted universe multiverse
+deb http://old-releases.ubuntu.com/ubuntu/ lunar-updates main restricted universe multiverse
+deb http://old-releases.ubuntu.com/ubuntu/ lunar-backports main restricted universe multiverse
+deb http://old-releases.ubuntu.com/ubuntu/ lunar-security main restricted universe multiverse
+EOF'
+```
+
+Este comando faz **backup automático** do arquivo atual e escreve a nova configuração corretamente.
+
+---
+
 ## ⚙️ 2. Atualizar os pacotes
 
 Atualize os índices e os pacotes do sistema:
